@@ -1,3 +1,6 @@
+highlight = {
+  matches = false,
+}
 return {
   {
     "stevearc/conform.nvim",
@@ -94,6 +97,41 @@ return {
     end,
   },
 
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "k",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump {
+            labels = "abcdefghijklmnopqrstuvwxyz",
+            highlight = {
+              matches = false,
+            },
+            label = {
+              before = true,
+              after = false,
+            },
+          }
+        end,
+        desc = "Flash",
+      },
+    },
+  },
+  -- {
+  --   "smoka7/hop.nvim",
+  --   lazy = false,
+  --   version = "*",
+  --   opts = {
+  --     keys = "etovxqpdygfblzhckisuran",
+  --   },
+  --   config = function()
+  --     require "configs.hop"
+  --   end,
+  -- },
   -- Bufferline
   -- {
   -- "akinsho/bufferline.nvim",

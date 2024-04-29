@@ -5,7 +5,9 @@ local o = vim.o
 local w = vim.wo
 local b = vim.bo
 
-vim.o.keymodel = "startsel,stopsel"
+-- vim.o.keymodel = "startsel,stopsel"
+vim.o.keymodel = "startsel"
+
 w.wrap = false
 o.virtualedit = "onemore"
 
