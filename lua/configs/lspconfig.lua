@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "tsserver", "tailwindcss", "emmet_ls", "eslint" }
+local servers = { "html", "cssls", "tailwindcss", "emmet_ls", "eslint" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -13,3 +13,7 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+require("typescript-tools").setup {
+  on_attach = on_attach,
+}

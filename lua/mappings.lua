@@ -25,6 +25,8 @@ map({ "c" }, "<C-S-p>", "")
 map({ "n" }, ":", "")
 map({ "n" }, "s", "")
 map({ "n", "v", "i" }, "<C-w>", "")
+map({ "n" }, "I", "")
+map({ "n" }, "K", "")
 -- disable keymaps end
 
 -- vscode like start
@@ -65,7 +67,8 @@ map({ "n", "v", "i" }, "<C-w>", "<cmd>lua require('nvchad.tabufline').close_buff
 map({ "v" }, "<tab>", ">")
 map({ "v" }, "<S-tab>", "<")
 -- commands
-map({ "n", "v", "i" }, "<C-S-p>", "<esc>:")
+map({ "n", "v", "i", "t" }, "<C-S-p>", "<esc>:")
+map({ "n", "v", "i", "t" }, "<C-p>", "<esc>:")
 -- vscode like end
 
 -- hop start
@@ -75,12 +78,15 @@ map({ "n" }, "k", "<cmp>:HopWord<cr>")
 -- terminal
 map(
   { "n", "v", "i", "t", "c" },
-  "<C-S-j>",
+  "<C-`>",
   "<esc><cmd>lua require('nvchad.term').toggle({ pos = 'sp', id = 'htoggleTerm' })<cr>"
 )
+
 -- telescope
 map({ "n", "v", "i", "t", "c" }, "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
-map({ "n", "v", "i", "t", "c" }, "<A-t>", "<cmd>Telescope find_files<cr>")
+map({ "n", "v", "i", "t", "c" }, "<C-e>", "<cmd>Telescope find_files<cr>")
+map({ "n", "v", "i", "t", "c" }, "<A-o>", "<cmd>Telescope oldfiles<cr>")
+map({ "n", "v", "i", "t", "c" }, "<A-t>", "<cmd>Telescope buffers<CR><cr>")
 local actions = require "telescope.actions"
 require("telescope").setup {
   defaults = {
@@ -94,12 +100,13 @@ require("telescope").setup {
   },
 }
 -- fix insert mode start
-map({ "i" }, "<C-BS>", "<esc><right>dbi")
+map({ "i" }, "<C-BS>", '<esc><right>"_dbi')
 -- fix insert mode end
 
 -- fix visual mode start
 map({ "v" }, "<C-BS>", '"_d')
 map({ "v" }, "<BS>", '"_d')
+map({ "v" }, "<CR>", '"_c<cr>')
 
 map({ "n" }, "<S-down>", "<S-down>")
 map({ "v" }, "<S-down>", "<S-down>")
@@ -135,20 +142,21 @@ map({ "n" }, "r", "R")
 map({ "n" }, "<delete>", '"_x')
 map({ "n" }, "<C-space>", "a")
 map({ "n" }, "<end>", "g^")
-map({ "n" }, "<end>", "g$")
+map({ "n" }, "<end>", "g<end>")
 map({ "n" }, "<cr>", "i<cr>")
-map({ "n", "v" }, "u", "g^")
-map({ "n", "v" }, "o", "g$")
+map({ "n", "v" }, "u", "<home>")
+map({ "n", "v" }, "o", "<end>")
 map({ "n" }, "<tab>", "S")
 map({ "n" }, ".", ".")
 
 -- fix delete in normal mode start
-map({ "n" }, "d", '"_c')
-map({ "n" }, "do", "C")
-map({ "n" }, "du", "c<home>")
-map({ "n" }, "d<end>", "C")
-map({ "n" }, "d<home>", "c<home>")
-map({ "n" }, "dw", "ciw")
+map({ "n" }, "d", '"_d')
+map({ "n" }, "c", '"_c')
+-- map({ "n" }, "do", "C")
+-- map({ "n" }, "du", "c<home>")
+-- map({ "n" }, "d<end>", "C")
+-- map({ "n" }, "d<home>", "c<home>")
+-- map({ "n" }, "dw", "ciw")
 -- fix delete in normal mode end
 -- fix normal mode end
 
@@ -157,12 +165,61 @@ map({ "n" }, "r", "R")
 map({ "n" }, "<delete>", "s")
 map({ "n" }, "<C-left>", "b")
 map({ "n" }, "<C-right>", "e")
-map({ "n" }, "<C-BS>", "db")
+map({ "n" }, "<C-BS>", '"_db')
+
 -- map({ "n" }, "<C->", "dw")
 map({ "i" }, "<C-right>", "<esc>ea")
+-- map({ "c" }, "<tab>", "<C-u>")
+map({ "c" }, "<C-BS>", "<C-w>")
+map({ "t" }, "<C-BS>", "<C-w>")
 
--- ve<C-G>
+map({ "n" }, "g", "`")
+map({ "n" }, "gii", "gi")
+map({ "n" }, "gv", "gv")
+map({ "n" }, "gf", "gf")
+
+map({ "n", "i", "v", "c", "t" }, "<A-1>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[1])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-2>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[2])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-3>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[3])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-4>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[4])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-5>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[5])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-6>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[6])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-7>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[7])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-8>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[8])
+end)
+map({ "n", "i", "v", "c", "t" }, "<A-9>", function()
+  vim.api.nvim_set_current_buf(vim.t.bufs[9])
+end)
+
+map({ "n", "v", "i", "t", "c" }, "<C-S-pageup>", "<cmd>lua require('nvchad.tabufline').move_buf(-1)<cr>")
+map({ "n", "v", "i", "t", "c" }, "<C-S-pagedown>", "<cmd>lua require('nvchad.tabufline').move_buf(1)<cr>")
+
+map("t", "<C-x>", "")
+map("t", "<C-x>", "<C-x>")
+map("n", "yo", "y<end>")
+map("n", "yu", "y<home>")
+map("n", "<C-up>", "5<up>")
+map("n", "<C-down>", "5<down>")
+
+-- map({ "n" }, "`", "g")
+-- map({ "n" }, "g", "`")
+
 --some end
-map({ "n", "i" }, "<C-r>", vim.diagnostic.open_float)
-map({ "n", "i" }, "<C-S-r>", vim.diagnostic.goto_next)
-map({ "n", "i" }, "<A-l>", vim.lsp.buf.code_action)
+-- map({ "n", "i" }, "<C-r>", vim.diagnostic.open_float)
+-- map({ "n", "i" }, "<C-k>", vim.diagnostic.goto_next)
+-- map({ "n", "i" }, "<A-l>", vim.lsp.buf.code_action)

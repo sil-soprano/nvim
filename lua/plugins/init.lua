@@ -41,6 +41,7 @@ return {
         "html",
         "css",
         "scss",
+        "pug",
         "javascript",
         "typescript",
         "tsx",
@@ -75,14 +76,6 @@ return {
     end,
   },
   {
-    "mfussenegger/nvim-lint",
-    lazy = false,
-    config = function()
-      require "configs.lint"
-    end,
-  },
-
-  {
     "vidocqh/auto-indent.nvim",
     lazy = false,
     config = function()
@@ -96,15 +89,15 @@ return {
       require "configs.nvimtree"
     end,
   },
-
   {
     "folke/flash.nvim",
     event = "VeryLazy",
+    -- lazy = false,
     opts = {},
     keys = {
       {
-        "k",
-        mode = { "n", "x", "o" },
+        "<A-k>",
+        mode = { "n", "i", "x", "o" },
         function()
           require("flash").jump {
             labels = "abcdefghijklmnopqrstuvwxyz",
@@ -121,55 +114,10 @@ return {
       },
     },
   },
-  -- {
-  --   "smoka7/hop.nvim",
-  --   lazy = false,
-  --   version = "*",
-  --   opts = {
-  --     keys = "etovxqpdygfblzhckisuran",
-  --   },
-  --   config = function()
-  --     require "configs.hop"
-  --   end,
-  -- },
-  -- Bufferline
-  -- {
-  -- "akinsho/bufferline.nvim",
-  -- lazy = false,
-  -- dependencies = {
-  -- "nvim-tree/nvim-web-devicons",
-  -- },
-  -- config = function()
-  -- require "configs.bufferline"
-  -- end,
-  -- },
-  -- Hop (Better Navigation)
-  -- {
-  -- "phaazon/hop.nvim",
-  -- lazy = true,
-  -- config = function()
-  -- require "configs.hop"
-  -- end,
-  -- },
-
-  -- {
-  -- "Wansmer/langmapper.nvim",
-  -- lazy = false,
-  -- priority = 1, -- High priority is needed if you will use `autoremap()`
-  -- },
-  -- need check start
-  -- {
-  -- "windwp/nvim-ts-autotag",
-  -- ft = {
-  -- "javascript",
-  -- "javascriptreact",
-  -- "typescript",
-  -- "typtscriptreact",
-  -- "html",
-  -- },
-  -- config = function()
-  -- require("nvim-ts-autotag").setup()
-  -- end,
-  -- },
-  -- need check end
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    lazy = false,
+    opts = {},
+  },
 }

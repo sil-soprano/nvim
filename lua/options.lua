@@ -6,7 +6,10 @@ local w = vim.wo
 local b = vim.bo
 
 -- vim.o.keymodel = "startsel,stopsel"
-vim.o.keymodel = "startsel"
+o.keymodel = "startsel"
+o.termguicolors = true
+
+o.so = 4
 
 w.wrap = false
 o.virtualedit = "onemore"
